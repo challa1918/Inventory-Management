@@ -1,0 +1,245 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Fashion Feet</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="images/icon.png" type="image/icon type">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <style>
+    #success_message {
+      display: none;
+    }
+  </style>
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+  <div class="wrapper">
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-light " style="margin-left: 25%;">
+      <!-- Left navbar links -->
+
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+              <i class="fas fa-bars"></i></a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/addproduct" class="nav-link">Add Product</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/updatestock" class="nav-link">Update Stock</a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="/clearstock" class="nav-link">Clear Stock</a>
+          </li>
+        </ul>
+      </nav>
+    </nav>
+
+    <!-- /.navbar -->
+
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-link">
+        <img src="images/fashionfeetlog.jpg" alt="Fashion Feet Logo" class="brand-image img-circle elevation-3">
+        <span class="brand-text font-weight-light">Fashion Feet</span>
+      </a>
+      <!-- Sidebar -->
+      <div class="sidebar">
+
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+              <a href="/" class="nav-link">
+                <i class="nav-icon far fa-circle text-info "></i>
+                <p>Home</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="addproduct" class="nav-link ">
+                <i class="nav-icon far fa-circle text-info "></i>
+                <p>Add Product</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="stockdetails" class="nav-link">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p class="text">Stock Details</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="updatestock" class="nav-link ">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p class="text">Update Stock</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="clearstock" class="nav-link active">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p class="text">Clear Stock</p>
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="margin-top: 15px;">
+      <section class="container">
+
+        <form class="form-inline" action="/clearstockget" method="post" style="margin-left: 35%;">
+          <div class="form-group mx-sm-3 mb-2">
+            <label for="inputPassword2" class="sr-only">Enter Product Id</label>
+            <% if(details!=null) { %>
+              <% if ( details.length==0){ %>
+                <input type="number" class="form-control" name="pid" placeholder="Product Id">
+
+                <% }else{%>
+                  <input type="number" class="form-control" name="pid" value="<%= details[0].pid%>"
+                    placeholder="Product Id">
+
+                  <%} %>
+
+                    <% }else{%>
+                      <input type="number" class="form-control" name="pid" placeholder="Product Id">
+                      <%} %>
+
+          </div>
+          <button type="submit" id="getpid" class="btn btn-primary mb-2">Confirm ID</button>
+        </form>
+
+
+
+        <% if(details!=null) { %>
+
+
+          <% if ( details.length==0){ %>
+
+
+            <center>
+              <div class="alert alert-danger">
+                No product exist with given product id...
+              </div>
+            </center>
+
+
+            <% }else{%>
+
+              <section class="container">
+                <div class="card"
+                  style="width: 700px; height: 20px;margin-left: 20%; text-align: center; margin-top: 10px;">
+                  <div class="card-header bg-gradient-danger">
+                    <h4>Clearing Product From Inventory </h4>
+                  </div>
+                  <form id="product-data" method="post" action="/clearstockfinal"
+                    style="border: 2px solid red; padding: 10px; margin:1px;">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputEmail4">Product ID</label>
+                        <input type="number" class="form-control" name="pid" value="<%= details[0].pid%>"
+                          placeholder="Product ID">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputPassword4">Brand</label>
+                        <input type="text" class="form-control" name="brand" value="<%= details[0].brand%>"
+                          placeholder="Brand">
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-12">
+                        <label for="inputAddress">Category</label>
+                        <select name="category" class="form-control">
+                          <option selected>
+                            <%= details[0].category%>
+                          </option>
+                          <option>Men's Sports Shoes</option>
+                          <option>Men's Casual Shoes</option>
+                          <option>Men's Formal Shoes</option>
+                          <option>Men's Sandals & Floaters</option>
+                          <option>Women's Flat</option>
+                          <option>Women's Heels</option>
+                          <option>Women's Slippers & Flip Flops</option>
+                          <option>Women's Snickers</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-3">
+                        <label for="inputCity">size</label>
+                        <input type="number" class="form-control" name="size" value="<%= details[0].size%>"
+                          placeholder="size">
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="inputState">Quantity</label>
+                        <input type="number" class="form-control" name="quantity" value="<%= details[0].quantity%>"
+                          placeholder="Quality">
+
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="inputZip">Cost Price</label>
+                        <input type="number" class="form-control" name="cp" value="<%= details[0].cp%>"
+                          placeholder="Cost Price">
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="inputZip">Selling Price</label>
+                        <input type="number" class="form-control" name="sp" value="<%= details[0].sp%>"
+                          placeholder="Selling Price">
+                      </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Delete Product">
+                  </form>
+                </div>
+              </section>
+              <div class="alert alert-danger" role="alert"
+                style="float: right; margin-top: 12.5%;width: 100px;margin-right: 15px;">
+                <b>NOTE: </b>
+                <p>Product will be completely erased from inventory </p>
+              </div>
+
+
+
+
+              <%} %>
+
+
+
+                <% } %>
+
+
+
+
+
+
+
+      </section>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>

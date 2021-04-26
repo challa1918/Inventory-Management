@@ -1,0 +1,24 @@
+{
+  "name": "inventory-management",
+  "version": "1.0.0",
+  "description": "A web Application developed for Stock Management",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.6.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "jquery": "^3.6.0",
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.5",
+    "nodemon": "^2.0.7",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Ramesh Challa",
+  "license": "ISC"
+}
