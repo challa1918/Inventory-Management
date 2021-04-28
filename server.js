@@ -42,7 +42,7 @@ app.post("/updateproductfinal", (req, res) => {
    console.log("Updating: ");
    console.log(req.body);
    var myquery = { pid: req.body.pid };
-   var newvalues = { $set: { pid: req.body.pid, brand: req.body.brand, category: req.body.category, size: req.body.size, quantity: req.body.quantity, cp: req.body.cp, sp: req.body.sp } };
+   var newvalues = { $set: { pid: req.body.pid, brand: req.body.brand, category: req.body.category, size: req.body.size, quantity: (Number(req.body.oldq) + Number(req.body.quantity)).toString(), cp: req.body.cp, sp: req.body.sp } };
    db.collection("Stock").updateOne(myquery, newvalues, function (err, result) {
       if (err) throw err;
       console.log("1 document updated");
@@ -52,7 +52,7 @@ app.post("/updateproductfinal", (req, res) => {
 });
 app.post("/clearstockfinal", (req, res) => {
    console.log("Deleting: ");
-   var myquery = { pid: req.body.pid };
+   var myquery = { pid: req.body.pid.toString() };
    db.collection("Stock").deleteOne(myquery, function (err, obj) {
       if (err) throw err;
       console.log("1 document deleted");
@@ -105,6 +105,15 @@ app.get("/stockdetails", function (req, res) {
    });
 
 });
+
+
+
+
+
+
+
+
+
 
 
 
